@@ -1,9 +1,9 @@
 ///////////////////////////////// VARIABLES /////////////////////////////////
  var cat;
- var catImg1,catImg2;
+ var catImg1,catImg2,catImg3;
 
  var rat;
- var ratImg1,ratImg2;
+ var ratImg1,ratImg2,ratImg3;
 
  var garden;
  var gardenImg;
@@ -13,17 +13,17 @@
  function preload() {
 
   //cat loadImages
-   catImg1 = loadImage("cat1.png");
-   catImg2 = loadImage("cat2.png","cat3.png");
-   catImg3 = loadImage("cat4.png");
+   catImg1 = loadImage("images/cat1.png");
+   catImg2 = loadImage("images/cat2.png","images/cat3.png");
+   catImg3 = loadImage("images/cat4.png");
 
   //rat loadImages
-   ratImg1 = loadImage("mouse1.png");
-   ratImg2 = loadImage("mouse2.png","mouse3.png");
-   ratImg3 = loadImage("mouse4.png");
+   ratImg1 = loadImage("images/mouse1.png");
+   ratImg2 = loadImage("images/mouse2.png","images/mouse3.png");
+   ratImg3 = loadImage("images/mouse4.png");
 
   //garden loadImage
-   gardenImg = loadImage("garden.png");
+   gardenImg = loadImage("images/garden.png");
  }
 //////////////////////////////////////////////////////////////////////////////
 
@@ -35,9 +35,10 @@
    cat = createSprite(870,600);
    cat.addAnimation("sittedcat",catImg1);
    cat.scale = 0.2;
+   cat.velocityX = 0;
 
   //rat createSprite
-   rat = createSprite(840,600);
+   rat = createSprite(200,600);
    rat.addImage("stillrat",ratImg1)
    rat.scale = 0.2;
     
@@ -46,15 +47,20 @@
 
 ////////////////////////////// FUNCTION DRAW //////////////////////////////
  function draw() {
-  background(255);
+  background(gardenImg);
 
   //collide cat&rat
    if(cat.x-rat.x < (cat.width-rat.width)/2){
-    cat.velocity = 0;
-    cat.addAnimation("finalcat",catImg3);
-    cat.changeAnimation("finalcat");
-    cat.x = 300;
-    cat.scale = 0.2;
+    //cat
+     cat.velocityX = 0;
+     cat.addAnimation("finalcat",catImg3);
+     cat.changeAnimation("finalcat");
+     cat.x = 300;
+     cat.scale = 0.2;
+
+    //rat
+     rat.addAnimation("finalrat",ratImg3);
+     rat.changeImage("finalrat");
    }
 
   drawSprites();
@@ -71,10 +77,10 @@
     rat.frameDelay = 25;
 
    //cat
-    cat.velocity = -5;
+    cat.velocityX = -5;
     cat.addAnimation("walkingcat",catImg2);
     cat.changeAnimation("walkingcat");
-    //cat.frameDelay = 25; ???
+    cat.frameDelay = 25;
   }
 
  }
